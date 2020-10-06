@@ -20,12 +20,16 @@ app.get('/', (req, res) => {
 const ProductRouter = require('./routers/Product')
 const UsersRouter = require('./routers/Users')
 const uploadRouter = require('./routers/upload');
+const uploadsRouter = require('./routers/uploads');
+const SwippersRouter = require('./routers/swippers');
 
 
 //  使用路由 /index 是路由指向名称
 app.use(`/P1`, ProductRouter)
 app.use(`/`, UsersRouter)
 app.use(`/upload`, uploadRouter)
+app.use(`/uplodeSwippers`, uploadsRouter)
+app.use(`/Swippers`, SwippersRouter)
 
 
 app.get('/user/info', (req, res) => {

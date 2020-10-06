@@ -16,10 +16,11 @@ const show = async(req, res) => {
         })
     } else {
         res.send({
-            data: {
+            meta: {
                 status: 400,
                 msg: '获取数据失败'
-            }
+            },
+            data: null
         })
     }
 }
@@ -37,10 +38,11 @@ const create = async(req, res) => {
         })
     } else {
         res.send({
-            data: {
+            meta: {
                 status: 400,
                 msg: '添加失败'
-            }
+            },
+            data: null
         })
 
     }
