@@ -22,6 +22,7 @@ const UsersRouter = require('./routers/Users')
 const uploadRouter = require('./routers/upload');
 const uploadsRouter = require('./routers/uploads');
 const SwippersRouter = require('./routers/swippers');
+const ShopCartRouter = require('./routers/shopCart');
 
 
 //  使用路由 /index 是路由指向名称
@@ -30,6 +31,7 @@ app.use(`/`, UsersRouter)
 app.use(`/upload`, uploadRouter)
 app.use(`/uplodeSwippers`, uploadsRouter)
 app.use(`/Swippers`, SwippersRouter)
+app.use(`/`, ShopCartRouter)
 
 
 app.get('/user/info', (req, res) => {

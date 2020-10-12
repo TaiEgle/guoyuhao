@@ -8,12 +8,15 @@ const create = async(req, res) => {
 
     const salt = Date.now();
     const pwd = md5(req.body.pwd + salt);
+    const isAdmin = req.body.isAdmin;
+    // console.log(isAdmin);
 
 
     const userdata = {
             uname,
             pwd,
-            salt
+            salt,
+            isAdmin
         }
         // 注册查找重名
     const u = await Login({ uname })
@@ -72,7 +75,8 @@ const loginup = async(req, res) => {
                     msg: '用户登录成功'
                 },
                 data: {
-                    token: token
+                    token: token,
+                    unmae: rs.uname
                 }
             })
         } else {

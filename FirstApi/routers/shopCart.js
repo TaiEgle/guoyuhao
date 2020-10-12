@@ -1,21 +1,17 @@
 const express = require(`express`);
-const ProductRouter = express.Router();
-const ProductControll = require('../controll/ProductControll');
+const ShopCartRouter = express.Router();
 const { verifyToken } = require('../token')
-const path = require('path')
-const bodyparser = require('body-parser'); /* 解析post请求 */
-const urlencodedParser = bodyparser.urlencoded({ extended: false })
+const { AddCart, delCart, getCart, editCart } = require('../controll/ShopCartControll');
 
-
-ProductRouter.use((req, res, next) => {
+ShopCartRouter.use((req, res, next) => {
     var d = Date(Date.now());
     // 转换日期字符串中的毫秒数
     a = d.toString();
-    console.log('路由启动--' + a);
+    console.log('--购物车--路由启动--' + a);
     next()
 })
 
-
+// 中间件解token
 function vtoken(req, res, next) {
     // 从 Authorization 切割出token 值
     const token = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : '';
@@ -49,28 +45,18 @@ function vtoken(req, res, next) {
         }
     }
 }
-// GET查询接口
-ProductRouter.get('/', ProductControll.show);
 
-// 根据Id查询一个
-ProductRouter.get(`/:id`, ProductControll.showOne);
+//购物车 post请求 添加购物车
+ShopCartRouter.post('/addCart', vtoken, AddCart);
+
+//购物车 post请求 删除购物车商品
+ShopCartRouter.post('/delCart', vtoken, delCart);
+
+//购物车 get请求 查询购物车
+ShopCartRouter.get('/getCart', vtoken, getCart);
+
+//购物车 post请求 修改购物车
+ShopCartRouter.post('/editCart', vtoken, editCart);
 
 
-// post请求
-ProductRouter.post('/add', urlencodedParser, ProductControll.create);
-
-// post请求
-ProductRouter.get('/add', (req, res) => {
-    const imgpath = path.join(__dirname, 'index.html');
-    res.sendfile(imgpath)
-
-});
-
-// delete请求
-ProductRouter.delete(`/del/:id`, ProductControll.del)
-
-// patch请求
-ProductRouter.patch(`/change/:id`, ProductControll.change)
-
-// 暴露接口
-module.exports = ProductRouter;
+module.exports = ShopCartRouter

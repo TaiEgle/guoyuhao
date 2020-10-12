@@ -26,7 +26,7 @@ const P = db.model('products', {
 });
 
 
-//添加书籍信息
+//添加 信息
 const addProduct = (postProduct) => {
     const newProduct = new P(postProduct);
     return newProduct.save()
@@ -41,7 +41,7 @@ const addProduct = (postProduct) => {
 }
 
 
-//获取所有书籍信息
+//获取所有 信息
 const getProduct = (num, page) => {
         return P.find().limit(num).skip(page)
             .then((res) => {
@@ -53,7 +53,7 @@ const getProduct = (num, page) => {
 
             });
     }
-    //通过书籍_id修改书籍信息
+    //通过 _id修改 信息
 const patchProduct = (id, update) => {
         return P.updateOne({ _id: id }, { $set: update })
             .then((res) => {
@@ -62,7 +62,7 @@ const patchProduct = (id, update) => {
                 return res;
             })
     }
-    //通过书籍_id删除书籍信息
+    //通过 _id删除 信息
 const deleteProduct = (id) => {
         return P.deleteMany({ _id: id })
             .then((res) => {
@@ -75,15 +75,15 @@ const deleteProduct = (id) => {
 
             });
     }
-    //通过书籍_id获取单本书籍信息
+    //通过 _id获取  信息
 const getOneProduct = (id) => {
     return P.findOne({ _id: id })
         .then((res) => {
-            console.log('成功', res);
+            // console.log('成功', res);
 
             return res;
         }).catch((err) => {
-            console.log('失败', err);
+            // console.log('失败', err);
             return false
 
         });
@@ -93,5 +93,6 @@ module.exports = {
     getProduct,
     patchProduct,
     deleteProduct,
-    getOneProduct
+    getOneProduct,
+    P
 }

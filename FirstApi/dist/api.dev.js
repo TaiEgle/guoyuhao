@@ -31,7 +31,9 @@ var uploadRouter = require('./routers/upload');
 
 var uploadsRouter = require('./routers/uploads');
 
-var SwippersRouter = require('./routers/swippers'); //  使用路由 /index 是路由指向名称
+var SwippersRouter = require('./routers/swippers');
+
+var ShopCartRouter = require('./routers/shopCart'); //  使用路由 /index 是路由指向名称
 
 
 app.use("/P1", ProductRouter);
@@ -39,6 +41,7 @@ app.use("/", UsersRouter);
 app.use("/upload", uploadRouter);
 app.use("/uplodeSwippers", uploadsRouter);
 app.use("/Swippers", SwippersRouter);
+app.use("/", ShopCartRouter);
 app.get('/user/info', function (req, res) {
   res.json({
     meta: {
